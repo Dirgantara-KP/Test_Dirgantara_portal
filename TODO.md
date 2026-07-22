@@ -1,10 +1,11 @@
-# TODO: Reorder Navigation - Pindahkan Peserta di bawah Job Title
+# TODO: Restruktur Navigasi & Dashboard
 
 ## Steps:
-- [x] 1. EventResource - tambah `$navigationSort = 1`
-- [x] 2. JobTitleResource - tambah `$navigationSort = 2`
-- [x] 3. PesertaResource - tambah `$navigationSort = 3`
-- [x] 4. KataPengantarResource - tambah `$navigationSort = 4`
-- [x] 5. TipeSoalResource - tambah `$navigationSort = 5`
-- [x] 6. Verifikasi hasil
-
+- [x] 1. Tipe Soal → pindah ke grup "Mengelola Soal" (sort: 1, di atas Bank Soal)
+- [x] 2. Bank Soal (SoalResource) → tambah `$navigationSort = 2`
+- [x] 3. Job Title → pindah ke grup "Data Peserta" (sort: 1)
+- [x] 4. Peserta → pindah ke grup "Data Peserta" (sort: 2)
+- [x] 5. Kata Pengantar Soal → update sort jadi 2 (karena Tipe Soal pindah)
+- [x] 6. Event (Jadwal Event) → tetap di grup "Referensi" (sort: 1)
+- [x] 7. Buat widget StatsOverview untuk dashboard (statistik read-only)
+- [x] 8. Verifikasi hasil

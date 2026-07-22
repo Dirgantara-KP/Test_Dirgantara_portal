@@ -21,6 +21,8 @@ class SoalResource extends Resource
 
     protected static ?string $navigationLabel = 'Bank Soal';
 
+    protected static ?int $navigationSort = 2;
+
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -38,7 +40,7 @@ class SoalResource extends Resource
                 ->label('Tipe Soal')
                 ->relationship('tipeSoal', 'nama')
                 ->required()
-                ->live() // agar repeater jawaban muncul/hilang otomatis
+                ->live()
                 ->preload(),
 
             Forms\Components\TextInput::make('kategori')
@@ -53,7 +55,6 @@ class SoalResource extends Resource
                 ->image()
                 ->directory('soal/pertanyaan'),
 
-            // Muncul hanya kalau tipe soal = PG
             Forms\Components\Repeater::make('jawabanSoals')
                 ->relationship()
                 ->label('Opsi Jawaban')
@@ -100,7 +101,6 @@ class SoalResource extends Resource
                 Tables\Actions\DeleteAction::make(),
             ])
             ->headerActions([
-                // "C. Loader soal" -> import massal dari Excel
                 Tables\Actions\Action::make('importExcel')
                     ->label('Import dari Excel')
                     ->icon('heroicon-o-arrow-up-tray')
@@ -112,23 +112,20 @@ class SoalResource extends Resource
                             ->directory('import-soal'),
                     ])
                     ->action(function (array $data) {
-    $path = \Illuminate\Support\Facades\Storage::disk('local')->path($data['file']);
-
-    if (! file_exists($path)) {
-        \Filament\Notifications\Notification::make()
-            ->title('File gagal diupload, coba upload ulang')
-            ->danger()
-            ->send();
-        return;
-    }
-
-    \Maatwebsite\Excel\Facades\Excel::import(new \App\Imports\SoalImport, $path);
-
-    \Filament\Notifications\Notification::make()
-        ->title('Soal berhasil diimport')
-        ->success()
-        ->send();
-}),
+                        $path = \Illuminate\Support\Facades\Storage::disk('local')->path($data['file']);
+                        if (! file_exists($path)) {
+                            \Filament\Notifications\Notification::make()
+                                ->title('File gagal diupload, coba upload ulang')
+                                ->danger()
+                                ->send();
+                            return;
+                        }
+                        \Maatwebsite\Excel\Facades\Excel::import(new \App\Imports\SoalImport, $path);
+                        \Filament\Notifications\Notification::make()
+                            ->title('Soal berhasil diimport')
+                            ->success()
+                            ->send();
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
