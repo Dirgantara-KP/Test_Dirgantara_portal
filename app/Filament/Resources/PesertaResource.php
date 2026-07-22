@@ -23,6 +23,8 @@ class PesertaResource extends Resource
 
     protected static ?string $navigationLabel = 'Peserta';
 
+    protected static ?int $navigationSort = 3;
+
     public static function form(Form $form): Form
     {
         return $form->schema([

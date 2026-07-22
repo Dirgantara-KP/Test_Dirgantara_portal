@@ -20,6 +20,8 @@ class KataPengantarResource extends Resource
 
     protected static ?string $navigationLabel = 'Kata Pengantar Soal';
 
+    protected static ?int $navigationSort = 4;
+
     public static function form(Form $form): Form
     {
         return $form->schema([

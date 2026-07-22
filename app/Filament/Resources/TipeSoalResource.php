@@ -21,6 +21,8 @@ class TipeSoalResource extends Resource
 
     protected static ?string $navigationLabel = 'Tipe Soal';
 
+    protected static ?int $navigationSort = 5;
+
     public static function form(Form $form): Form
     {
         return $form->schema([
