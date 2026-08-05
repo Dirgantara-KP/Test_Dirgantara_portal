@@ -21,6 +21,8 @@ class EventResource extends Resource
 
     protected static ?string $navigationLabel = 'Jadwal Event';
 
+    protected static ?int $navigationSort = 1;
+
     public static function form(Form $form): Form
     {
         return $form->schema([
