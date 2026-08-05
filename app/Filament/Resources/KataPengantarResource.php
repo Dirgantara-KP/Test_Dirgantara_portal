@@ -16,9 +16,11 @@ class KataPengantarResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
 
-    protected static ?string $navigationGroup = 'Referensi';
+    protected static ?string $navigationGroup = 'Mengelola Soal';
 
     protected static ?string $navigationLabel = 'Kata Pengantar Soal';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {

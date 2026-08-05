@@ -10,16 +10,19 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-// "F. Referensi tipe soal" -> master data PG / Esai
 class TipeSoalResource extends Resource
 {
     protected static ?string $model = TipeSoal::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
-    protected static ?string $navigationGroup = 'Referensi';
+    protected static ?string $navigationGroup = 'Mengelola Soal';
 
     protected static ?string $navigationLabel = 'Tipe Soal';
+
+    protected static ?int $navigationSort = 1;
+
+    protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {

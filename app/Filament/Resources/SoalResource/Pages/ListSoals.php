@@ -16,4 +16,11 @@ class ListSoals extends ListRecords
             Actions\CreateAction::make()->label('Tambah Soal'),
         ];
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            \App\Filament\Widgets\TipeSoalTableWidget::class,
+        ];
+    }
 }

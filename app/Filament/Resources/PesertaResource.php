@@ -11,7 +11,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class PesertaResource extends Resource
 {
@@ -19,9 +18,11 @@ class PesertaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
-    protected static ?string $navigationGroup = 'Referensi';
+    protected static ?string $navigationGroup = 'Data Peserta';
 
     protected static ?string $navigationLabel = 'Peserta';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -52,7 +53,6 @@ class PesertaResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                // Buat akun login dummy untuk peserta ini (dipakai sebelum SSO aktif)
                 Tables\Actions\Action::make('buatAkun')
                     ->label('Buat Akun Login')
                     ->icon('heroicon-o-key')
@@ -61,7 +61,7 @@ class PesertaResource extends Resource
                         $user = User::create([
                             'name' => $record->nama,
                             'email' => $record->email,
-                            'password' => Hash::make('password123'), // password default demo
+                            'password' => Hash::make('password123'),
                             'role' => 'peserta',
                         ]);
                         $record->update(['user_id' => $user->id]);
